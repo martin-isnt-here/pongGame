@@ -1,0 +1,23 @@
+print("Hello World!")
+
+
+
+
+
+
+import pygame
+
+pygame.init()
+
+win = pygame.display.set_mode((500,500))
+
+lose = False
+
+while not lose:
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			lose = True
+	pygame.draw.rect(win,(255,0,0),(250,250,100,100))
+
+	
+pygame.quit()

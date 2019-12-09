@@ -1,0 +1,29 @@
+<html>
+<body>
+<canvas id="gc" width = "800" height="600" 
+ style = "border:50px dashed #000000;"
+ >
+</canvas>
+<script>
+var c = document.getElementById("gc")
+var cc = c.getContext("2d")
+
+
+cc.beginPath();
+cc.moveTo(0,0);
+cc.lineTo(100,100);
+cc.stroke();
+
+block(0,0,800,600,"black");
+
+
+
+
+function block(left,top,width,height,color) {
+cc.fillStyle = color;
+cc.fillRect(left,top,width,height);
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<html>
+	<head>
+	</head>
+	<body>
+	<canvas id = "gamecanvas" width = "800"    height = "600"></canvas>
+
+	<script>
+	var canvas
+	var canvasContext
+	var ballX = 50;
+	var ballY = 50;
+	var ballSpeedX = 10;
+	var ballSpeedY = 4;
+	var leftSidePaddle = 200;
+	var rightSidePaddle = 200;
+	const paddleHeight = 100;
+
+	window.onload = function() {
+	canvas = document.getElementById('gamecanvas')
+	canvasContext = canvas.getContext("2d")
+	drawEverything();
+	}
+
+	setInterval(function () {
+	   moveEverything ();	
+	   drawEverything ();
+	},100/2)
+
+	function reset() {
+	ballSpeedX = -ballSpeedX;
+	ballX = 400;
+	ballY = 300;
+	}
+
+
+
+
+
+
+	function moveEverything () {
+	ballX = ballX + ballSpeedX;
+	if(ballX > 800) {
+		if(ballY > leftSidePaddle &&
+			ballY < leftSidePaddle+paddleHeight) {	
+			ballSpeedX = -ballSpeedX
+			} else {
+				reset();
+		}
+	}
+	
+	if(ballX < 0) {
+		if(ballY > rightSidePaddle &&
+			ballY < rightSidePaddle+paddleHeight) {	
+			ballSpeedX = -ballSpeedX
+			} else {
+				reset();
+	}
+	}
+
+
+	ballY = ballY + ballSpeedY;
+	if(ballY > 600) {
+	ballSpeedY = -ballSpeedY
+	}
+	
+	if(ballY < 0) {
+	ballSpeedY = -ballSpeedY
+	}
+	
+	}	
+	window.addEventListener("keydown", arrowKey, false);
+	function arrowKey(key){
+	if(key.keyCode == "87") {
+	
+	leftSidePaddle -= 50
+	}
+	}
+
+	window.addEventListener ("keydown", asdf, false);
+
+	function asdf (key) {
+	if(key.keyCode == "83") {
+	leftSidePaddle += 50
+	}
+
+	}
+
+	window.addEventListener("keydown", asdfg, false);
+	function asdfg(key){
+	if(key.keyCode == "38") {
+	
+	rightSidePaddle -= 50
+	}
+	}
+
+	window.addEventListener ("keydown", asdfgh, false);
+
+	function asdfgh (key) {
+	if(key.keyCode == "40") {
+	
+	rightSidePaddle += 50
+	}
+
+	}
+
+
+
+	function drawEverything() {
+	block(0,0,800,600,"black")
+	block(0,leftSidePaddle,10,paddleHeight,"green")
+	block(790,rightSidePaddle,10,paddleHeight,"green")
+
+
+	ball(ballX,ballY,10,"white")
+	}
+
+	// simple circel
+	function ball(X,Y,rad,color) {
+	canvasContext.fillStyle = color;
+	canvasContext.beginPath();
+	canvasContext.arc(X,Y,rad,0,Math.PI*2, true);
+	canvasContext.fill();
+	}
+
+
+	// simple block
+	function block(left,top,width,height,color) {
+	canvasContext.fillStyle = color;
+	canvasContext.fillRect(left,top,width,height,color);
+	}
+
+	</script>
+
+
+	</body>
+
+
+
+
+	</html>

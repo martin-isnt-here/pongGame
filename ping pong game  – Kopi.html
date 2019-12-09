@@ -1,0 +1,129 @@
+<hthml>
+<head>
+<title>ping pong game</title>
+</head>
+<body>
+<canvas id="myCanvas" width="1400" height="700"></canvas>
+<style>
+body {
+background:black;
+}
+
+
+</style>
+
+<script>
+
+
+
+var canvas; 
+var canvasContext;
+var ballY = 430;
+var ballX = 600;
+var ballSpeedX = 10;
+var ballSpeedY = 3;
+var paddle1Y = 250;
+const paddleHeight = 150;
+
+function mouseCodes (evt) {
+var rect = canvas.getBoundingClientRect();
+var root = document.documentElement;
+var mouseX= evt.clientX - rect.left - root.scrollLeft
+var mouseY= evt.clientY - rect.top - root.scrollTop;
+return {
+	x:mouseX,
+	y:mouseY
+};
+}
+
+
+window.onload = function() {
+
+canvas = document.getElementById ('myCanvas');
+canvasContext = canvas.getContext ('2d');
+
+setInterval(function () {
+       drawEverything();
+       moveEverything();
+}, 5)
+
+canvas.addEventListener("mousemove",
+	function(evt) {
+		var mousePos = mouseCodes(evt);
+		paddle1Y = mousePos.y-(paddleHeight/2);
+});
+
+}
+
+function ballReset () {
+		ballSpeedX = -ballSpeedX;
+		ballX = canvas.width/2
+		ballY = canvas.height/2
+}
+
+
+function moveEverything() {
+
+ballX = ballX + ballSpeedX;
+	
+
+if(ballX > canvas.width) {
+ballSpeedX = - ballSpeedX;
+
+}
+if(ballX < 0) {
+		if(ballY > paddle1Y &&
+		   ballY < paddle1Y + paddleHeight) {
+		ballSpeedX = -ballSpeedX;
+		leftSideScore++;
+		} else { ballReset(); }
+
+//ballSpeedX = - ballSpeedX;
+
+}
+
+
+
+ballY = ballY + ballSpeedY;
+if(ballY > canvas.height) {
+ballSpeedY = - ballSpeedY;
+}
+if(0 > ballY) {
+ballSpeedY = - ballSpeedY;
+}
+}
+
+function leftSideScore () {
+
+}
+
+
+
+
+function drawEverything() {
+
+canvasContext.fillStyle = 'white';
+canvasContext.fillRect(0,0,canvas.width,canvas.height);
+ 
+// left side paddle 
+canvasContext.fillStyle = 'grey';
+canvasContext.fillRect(0,paddle1Y,10,150);
+
+						
+// ball
+canvasContext.fillStyle = 'black';
+canvasContext.beginPath ();
+canvasContext.arc(ballX,ballY,15,0,Math.PI*2, true);	
+canvasContext.fill();
+
+canvasContext.fillText(leftSideScore, 100, 100)
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>

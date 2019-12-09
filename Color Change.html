@@ -1,0 +1,47 @@
+<html>
+<body>
+<canvas id="gc" width = "500" height = "500"></canvas>
+<script>
+var cs = document.getElementById ("gc")
+var ccs = cs.getContext ("2d")
+var wiHi = 500;
+var wiHi1 = 0;
+
+block(0,0,wiHi,wiHi,"black")
+block(0,0,wiHi1,wiHi1,"red")
+
+
+window.addEventListener("keydown",asdf,false);
+
+function asdf (key) {
+if(key.keyCode == "82") {
+wiHi += 500;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function block(left,top,width,height,color) {
+ccs.fillStyle = color
+ccs.fillRect(left,top,width,height)
+}
+</script>
+</body>
+
+
+</html>
